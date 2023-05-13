@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+	 <meta charset="UTF-8">
+	   <meta http-equiv="X-UA-Compatible" content="IE-edge">
+	   <meta name="viewport" content="widht=device-widht, initial-scale=1.0">
+	   <link rel="stylesheet" href="styleu2.css">
+
+	   <title> UNIDAD 2 </title>
+    </head>
+
+     <body>
+	 
+	 <section class="header">
+	 <h1> ESTRUCTURA Y FUNCIONAMIENTO DE LA UNIDAD CENTRAL DE PROCESAMIENTO (CPU) </h1>
+	 </section>
+
+	 
+	 <h2 class="titulo"> 2.1 Organizaci&oacuten del procesador </h2>
+	 
+       <p>Corresponde a la unidad principal dentro de la arquitectura de un computador (dispositivo maestro por excelencia) cuya funcionalidad es la ejecución
+	   de programas almacenados en memoria central. En palabras generales esta unidad extrae cada instrucción, la examina, ejecuta y gobierna el flujo de 
+	   ejecución de dicho proceso, i.e. determina la secuencia de micro-eventos a ejecutar. <br>
+	   </p>
+	   <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQjWQ4RMDkOp3n9pg9gcp1POG-Mb_QgMbOor320ByskxsyCVfS2" width="400px">
+	   <p>Sus partes fundamentales son: <br>
+          <b>Unidad de Control:</b> Extrae la instrucción en curso de memoria principal (nivel de lenguaje de máquina), hace el proceso de decodificación para 
+		  interpretar su tipo y la naturaleza de sus argumentos. Con esto provee la señalización de control para las restantes etapas de la ejecución de dicha
+		  instrucción. <br>
+		  <b>Unidad Aritmética Lógica (ALU):</b> Dispositivo que realiza las operaciones aritméticas (sumas, multiplicaciones) o lógicas (OR, AND, NOT), 
+		  determinadas por la unidad de control, sobre los argumentos también determinados en el proceso de decodificación. Como se verá, esta unidad
+          se diseña utilizando dispositivos combinacionales y secuenciales (compuertas lógicas). <br>
+		  <b>Registros:</b> Pequeña memoria de alta velocidad integrada dentro de la CPU, que permite almacenar resultados intermedios, información de control
+		  y estado en dicho proceso. Dentro de los registros más emblemáticos presentes en prácticamente todas las organizaciones de procesadores se 
+		  encuentran: <br>
+		  <ul>
+		  <li> PC (Program Counter): Almacena la información de la posición de memoria de la instrucción a ejecutar por la CPU, su modificación a lo largo del
+		  tiempo esta relacionado con el flujo lógico de ejecución de un programa.</li>
+		  <li> IR (Instruction Register): Almacena la información de la codificación en lenguaje de maquina (nivel 2) de la instrucción en curso. Corresponde
+		  al contenido de la posición de memoria direccionada por el registro PC al comienzo de la ejecución de una nueva instrucción</li>
+		  <li>STATUS: Este registro almacena las celdas de estados de la CPU (o flags) después de haber ejecutado cierta instrucción. Esta información es 
+		  indispensable para implementar instrucciones de control de flujo (branch) al nivel de lenguaje de máquina.</li>
+		  <li>ACUMULADORES: Registros temporales disponibles para programadores de nivel 2 (lenguaje de máquina) para almacenar variables intermedias en un
+          proceso. Estos pueden ser de propósito general o exclusivamente de datos o direcciones, estos últimos para acceder a argumentos en memoria principal.
+		  El tamaño de estos registros (número de bits) y el número de éstos depende del diseño arquitectónico de la CPU. </li>
+		  <li> SP: Almacena la dirección de memoria del comienzo de un pila (stack), para almacenar variables locales de los procedimientos. Este espacio
+		  memoria temporal se maneja con este registro.</li>
+		  </ul>
+		  </p>
+		  <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0PzN9urqDwunpBgcgdr8UG0B-eE8ORQQ8GZ7qyiJun3jn45An" width="400px">
+		  
+		  <h2 class="titulo"> 2.2 Estructura de los registros </h2>
+		  <h3 class="subtitulo"> 2.2.1 Registros visibles para el usuario </h3>
+		  <p>Son los registros accesibles al programador de lenguaje de máquina, los cuales son utilizados con el objeto de minimizar los accesos a memoria 
+		  principal, típicamente registros de entrada salida de la ALU. Estos registros pueden ser de uso general o específico. Por ejemplo hay registros que 
+		  sólo son utilizados como registros de direcciones, otros que sólo son registros de datos (argumentos de entrada o salida de la ALU). También pueden
+          existir registros de propósito general los cuales son utilizados tanto como datos como para el cálculo de direcciones. Dado que estos registros son 
+		  visibles para el programador de nivel 2, estas restricciones están estipuladas en la sintaxis de dicho lenguaje 2. <br>
+          De aquí se ve que el lenguaje de máquina (repertorio de instrucciones interpretado por la CPU) esta condicionado a las restricciones de diseño de 
+		  su CPU. <br> </p>
+		  
+		  <h3 class="subtitulo"> 2.2.2 Registros de control y de estado </h3>
+		  <p> Son utilizados por la unidad de control para controlar el funcionamiento de la CPU, ejemplo PC, IR, STATUS. Este último almacena los bits de
+		  código de condición, información del estado de ejecución del proceso que permite implementar los saltos condicionales en el flujo de un proceso. 
+		  Estos bits son fijados por el hardware de la CPU a consecuencia de la última operación de la ALU. <br>
+          Los más emblemáticos son: <br>
+         <i> Signo:</i> contiene el bit de signo de la última operación. <br>
+         <i>Cero:</i> indica cuando la operación fue cero. <br>
+         <i> Acarreo: </i>indica acarreo de bit en la suma. <br>
+		 <i>Desbordamiento:</i> usado para indicar desbordamiento aritmético (resultado inválido, fuera del rango de representabilidad numérico). 
+		 </p>
+		 
+		 <h3 class="subtitulo"> 2.2.3 Conjunto de instrucciones </h3>
+		 <p>La CPU gobierna la extracción secuencial de instrucciones de un programa desde la memoria principal (programa ejecutable). Por tanto una
+         instrucción se representa físicamente por una trama de bits almacenados en algún bloque de memoria. El tamaño de esta depende del diseño al nivel de 
+		 lenguaje de máquina, por ejemplo la arquitectura MIPS (SPARC5) tiene instrucciones de máquina de 32bit (4byte) independiente de su tipo.<br>
+		 los campos b&aacutesicos se ilustran en el siguiente ejemplo: <br>
+		 </p>
+		  <table class="tabla" border="1" width="600px">
+		  <tr> 
+		  <td> opcode</td>
+		  <td> rs</td>
+		  <td> rt</td>
+		  <td> rd </td>
+		  <td> adress </td>
+		  </tr>
+		  </table>
+		  
+		  <br> 
+		  
+		  <p> 
+		  Opcode: la codificación de la operación a realizar por la CPU <br>
+		  <ul>
+           <li>rs: la codificación del primer registro de la CPU (argumento 1) </li>
+           <li>rt: la codificación del segundo registro de la CPU (argumento 2) </li>
+           <li>rd: la codificación del registro de la CPU de destino. </li>
+           <li>adress: codificación de un direccionamiento local para instrucciones del tipo de transferencia de datos (llevar datos desde la memoria a 
+		   registros y vice-versa). Es interesante mencionar que dependiendo del tipo de instrucción es el formato que esta posea, pues pueden tener uno o 
+		   dos argumentos y dependiendo de eso la validez de sus campos. </li>
+		   </ul>
+           El proceso de decodificación o interpretación de campos de una instrucción esta asociado a la Unidad de Control de la CPU. La salida de este 
+		   proceso es la señalización de control para todas las unidades internas de la CPU (ALU, registros, shift, multiplexores, etc.) para llevar a cabo 
+		   la ejecución.
+		  </p>
+		   <br> <br>
+		   
+		   <h3 class="titulo"> 2.3 El ciclo de la instrucci&oacuten </h3>
+		   <h2 class="subtitulo"> 2.3.1 Ciclo Fatch-Decode-Execute (FDE) </h2>
+		   <p> El proceso de ejecutar instrucciones se puede subdividir en una secuencia de pasos lógicos en un ciclo llamado extrae – decodifica – procesa (
+		   EDP). A nivel macro se puede decir que ocurren las siguientes instancias en dicho proceso:
+		   <ol> 
+		   <li> <b>(Instruction Fetch) </b>Extraer la instrucción de memoria (direccionada por el PC) y almacenarla en el IR. Utiliza las interfaces del bus de datos 
+		   y direcciones.</li>
+		   <li><b>(Instruction Decode)</b> Unidad de control inicia el proceso de decodificación, para determinar el tipo de instrucción (opcode). También se
+		   determina en esta etapa la naturaleza de los argumentos, por ejemplo si hay que accesarlos de memoria. Paralelamente se incrementa el PC para 
+		   apuntar a la siguiente instrucción.</li>
+		   <li> <b>(Operand Fetch)</b> Extrae los argumentos desde memoria o registros (si los hay) y carga en los registros de entrada de la ALU.</li>
+		   <li> <b>(Execute)</b> Ejecuta instrucción (ALU).</li>
+		   <li> <b>(Result Store)</b> Almacena los resultados en el lugar apropiado (registros internos temporales o memoria) </li>
+		   </ol>
+		   </p>
+           <img src=" data:image/jpeg;base64,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">
+
+		   <h2 class="subtitulo"> 2.3.2 Segmentaci&oacuten de instrucciones </h3>
+		   <p>La segmentación de cauce, también denominada pipeline, es una técnica empleada en el diseño de procesadores, basada en la división de la 
+		   ejecución de las instrucciones en etapas, consiguiendo así que una instrucción empiece a ejecutarse antes de que hayan terminado las anteriores y,
+		   por tanto, que haya varias instrucciones procesándose simultáneamente. <br>
+           Cada una de las etapas debe completar sus acciones en un ciclo de reloj, pasando sus resultados a la etapa siguiente y recibiéndolos de la anterior.
+		   Para eso es necesario almacenar los datos en registros intermedios. Cualquier valor que pueda ser necesario en una etapa posterior debe irse
+		   propagando a través de esos registros intermedios hasta que ya no sea necesario. <br>
+           Para conseguir la segmentación es necesario que una instrucción utilice solamente una etapa en cada ciclo de ejecución.<br>
+           Ya que todas las etapas deben de tardar lo mismo en su ejecución, el tiempo de ciclo será el de la etapa más lenta, más el del retardo provocado
+		   por la utilización de los registros intermedios. Comparando este esquema con el multiciclo, el tiempo de ciclo será más lento, pero el CPI (Ciclos
+		   Por Instrucción) será menor, lo que provoca un aumento del rendimiento. Ya que si no tenemos en cuenta los riesgos estructurales (que pueden 
+		   provocar paradas en el pipeline), tendríamos que en cada ciclo de reloj, termina de ejecutarse una instrucción. <br></p>
+		   
+		   <img src= "imagenes/sinsegmentacion.png"> <br>
+		   <img src="imagenes/consegmentacion.png"> <br>
+		   
+		   <h2 class="subtitulo"> 2.3.3 Segmentaci&oacuten: caracter&iacutesiticas y funciones </h2>
+		   
+		   <b> CARACTER&IacuteSTICAS </b> 
+		   <p>La principal característica de la segmentación es que su objetivo de la segmentación es ejecutar simultáneamente diferentes etapas de distintas 
+		   instrucciones, lo cual permite aumentar el rendimiento del procesador sin tener que hacer más rápidas todas las unidades del procesador (ALU, UC, 
+		   buses, etc). <br>
+           La división de la ejecución de una instrucción en diferentes etapas se debe realizar de tal manera que cada etapa tenga la misma duración, 
+		   generalmente un ciclo de reloj. Es necesario añadir registros para almacenar los resultados intermedios entre las diferentes etapas, de modo que la
+		   información generada en una etapa esté disponible para la etapa siguiente. <br> <br>
+		   
+		   <b> FUNCIONES </b>
+		   <p> El objetivo de la segmentación es ejecutar simultáneamente diferentes etapas de distintas instrucciones, lo cual permite aumentar el 
+		   rendimiento del procesador sin tener que hacer más rápidas todas las unidades del procesador (ALU, UC, buses, etc.) y sin tener que duplicarlas. <br>
+           Presentamos un mismo proceso con instrucciones de tres etapas, en el que cada etapa tarda el mismo tiempo en ejecutarse, resuelto sin segmentación 
+		   y con segmentación. <br>
+         </p>
+		 
+		 <h2 class="subtitulo"> 2.3.4 Modos de direccionamiento</h2>
+		 <b>DIRECCIONAMIENTO INMEDIATO</b>
+		 <p>Es la forma m&aacutes sencilla de direccionamiento, el operando est&aacute presente en la propia instrucci&oacuten. <br>
+         Este modo puede utilizarse para definir y utilizar constantes o para fijar valores iniciales de (inicializar) variables. Normalmente el valor se 
+		 almacena en el sistema Complemento a 2. La ventaja principal que posee este modo es que una vez captada la instrucci&oacuten, no se requiere resolver
+		 una referencia a memoria para obtener el operando, ahorr&aacutendose as&iacute pues un ciclo de memoria o de cach&eacute, en el ciclo de 
+		 instrucci&oacuten. La desventaja es que el tama˜no del n&uacutemero est&aacute restringido a la longitud del campo de direcciones. <br> <p>
+         <img src="imagenes/inmediato.png">
+		 <br>
+		 
+		 <b> DIRECCIONAMIENTO DIRECTO</b>
+		 <p>Una forma tambi&eacuten sencilla es el direccionamiento directo, donde el campo de direcciones contiene la direcci&oacuten efectiva del operando. 
+		 Esta t&eacutecnica fue com&uacuten en las primeras generaciones de computadoras y se encuentra a&uacuten en diversos sistemas.
+         Solo requiere una referencia a memoria y no necesita ning&uacuten c&aacuteculo especial. La limitaci&oacuten mas evidente es que proporciona un 
+		 espacio de direcciones restringido. </p>
+		 <img src= "imagenes/directo.png">
+		 <br>
+		 
+		 <b> DIRECCIONAMIENTO REGISTRO</b>
+		 <p>Es similar al direccionamiento Directo, con la diferencia que el operando ahora se encuentra en un registro del sistema en lugar de estar en 
+		 memoria principal. La ventaja principal de este modo es que solo es necesario un peque˜no campo de direcciones en la instrucci&oacuten y no se 
+		 requieren referencias a memoria. Adem&aacutes, el tiempo de acceso a un registro interno de CPU es menor al tiempo de acceso a memoria principal. 
+		 La desventaja principal es que el espacio de direccionamiento est&aacute limitado, pues se espera que la cantidad de registros visibles al
+         programador no sea muy grande. </p>
+		 <img src="imagenes/porRegistro.png">
+		 <br>
+		   
+		 <h3 class="titulo"> 2.4 Casos de estudio de CPU reales</h3>  
+		 <p> <b>AMD Ryzen 7 5800X</b> </p>
+		 <p> características:
+		 <ul>
+		 <li> Número de núcleos: 8 </li>
+         <li>Número de hilos de proceso: 16 </li>
+         <li>Reloj base: 3.8GHz </li>
+         <li>Frecuencia Turbo: Hasta 4.7GHz </li>
+         <li>Total Cache L2: 4MB</li>
+         <li>Total Cache L3: 32MB </li>
+         <li>Frecuencia desbloqueada: Si </li>
+         <li>CMOS: FinFET TSMC 7nm </li>
+         <li>Socket: AM4 </li>
+         <li>TDP por defecto: 105W </li>
+         <li>Temperatura máxima: 95 grados </li>
+         <li>Tipo de memoria: DDR4 </li>
+         <li>Canales de memoria: 2 canales</li>
+         <li>Velocidad máxima de memoria: DDR4 3200MHz</li>
+         <li>Arquitectura: Zen3</li>
+		 </ul>
+		 
+		 <br>
+		 los CCDs de 8 núcleos funcionan como un único bloque de  hasta 8 núcleos, ya no hay dos CCX en su interior con 4 núcleos por unidad, con 16 hilos de
+		 proceso, que comparten 32MB de cache de tercer nivel (antes 16 por CCX). Eso permite a AMD maximizar el rendimiento en base a latencias más reducidas
+		 y también al mejor aprovechamiento en buses internos de memorias DDR4 de alta velocidad y bajas latencias. Las 4MB de cache de segundo nivel 
+		 integradas en el CCD, son también fundamentales en la ganancia de IPC que presentan estos procesadores. <br>
+		 </p>
+         <img src="https://acf.geeknetic.es/imgw/imagenes/Tutoriales/2020/1922-AMD-Ryzen-7-5800/1922-AMD-Ryzen-7-5800-4.jpg?f=webp">	
+         <p>
+		 Su frecuencia de trabajo base de 3.8GHz, 4.7GHz cuando trabaja en modo turbo, tiene un consumo aproximado de 105w, pero admite soluciones térmicas de
+		 95w sin problemas (menos capacidad de turbo sostenido seguro) y cuenta con 32MB de memoria cache L3 de acceso directo para todos los núcleos 
+		 acompañados de una cache de segundo nivel de 4MB, 512KB por núcleo. <br>
+		 La unidad de control de memoria de esta generación también es similar a la de la anterior con soporte para doble canal de memoria DDR4 con capacidad 
+		 para montar hasta 128GB de capacidad en cuatro bancos. Como la generación anterior, incluso más, estos procesadores agradecen mucho las memorias 
+		 rápidas y de bajas latencias ya que muchos buses inferiores (como el Infinite Fabric o el UMC) e internos del procesador trabajan en base a la 
+		 frecuencia real de la memoria. Cuanto más rápidas, y con mejor latencia, más rápido el procesador. <br>
+         El IOD es el mismo que AMD uso para toda la generación Ryzen 3000, con un proceso de fabricación de 12nm, así que dispondremos de 24 líneas PCI 
+		 Express 4.0 de las cuales 16 van dedicadas a la conectividad de tarjetas gráficas de alto rendimiento, las otras ocho se dedican a otra conectividad
+		 como por ejemplo las cuatro líneas que usan los chipsets de esta serie. <br>
+         </p>		 
+		 <img src="https://acf.geeknetic.es/imgw/imagenes/Tutoriales/2020/1922-AMD-Ryzen-7-5800/1922-AMD-Ryzen-7-5800-13.jpg?f=webp" width="400px"> <br>
+		 
+		 <p><b>Intel Core i7 10700</b></p>
+		 <p> 
+		 Procesador Core i7-10700 lanzado al mercado por Intel; fecha de lanzamiento: 27 May 2020. Para el momento del lanzamiento, el procesador cuesta. 
+		 El procesador está diseñado para computadoras desktop y basado en la micro-arquitectura Comet Lake. <br>
+         El CPU está bloqueado para prevenir overclocking. Número total de núcleos - 8, subprocesos - 16. Velocidad de reloj máximo del CPU - 4.80 GHz. 
+		 Temperatura operativa máxima - 100°C. Tecnología de proceso de manufactura - 14 nm. Tamaño de la caché: L1 - 512 KB, L2 - 2 MB, L3 - 16 MB. <br>
+         Tipos de memorias soportadas: DDR4-2933. Tamaño máximo de memoria: 128 GB. <br>
+         Tipos de zócalos soportados: LGA 1200. Número máximo de procesadores en una configuración - 1. Consumo de energía (TDP): 65 Watt. <br>
+          El procesador tiene gráficas integradas Intel UHD Graphics 630 con los siguientes parámetros: tamaño máximo de memoria de video - 64 GB <br>
+		 </p>
+		 <img src="data:image/jpeg;base64,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">
+	
+         <p> <b> AMD Ryzen 7 7800X3D</b></p>
+		 <p>
+		 El primer procesador con 3D V-Cache de AMD fue el AMD Ryzen 7 5800X3D, un modelo revisado sobre el Ryzen 7 5800X con un solo CCD donde se multiplico
+		 la caché de tercer nivel hasta el triple de la disponible en el modelo original. Todo gracias a una arquitectura de apilamiento de memoria que 
+		 convierte a los Ryzen en algunos de los procesadores más avanzados del mercado. <br>
+		 
+		 <ul>
+		 <li>Fabricante de procesador: AMD</li>
+         <li>Modelo del procesador: 7800X3D</li>
+         <li>Frecuencia base del procesador: 4,2 GHz</li>
+         <li>Familia de procesador: AMD Ryzen 7 </li>
+         <li>Número de núcleos de procesador: 8</li>
+         <li>Socket de procesador: Socket AM5</li>
+         <li>Número de hilos de ejecución: 16</li>
+         <li>Modo de procesador operativo: 32-bit, 64 bits</li>
+         <li>Frecuencia del procesador turbo: 5,0 GHz</li>
+         <li>Caché del procesador: 96 MB L3 CCD0 + 8MB L2 = 104MB</li>
+         <li>Tipo de caché en procesador: L3 + L2</li>
+         <li>Potencia de diseño térmico (TDP): 120 W</li>
+		 </ul>
+		 Los procesadores 3D V-Cache se diferencian del resto de modelos por su diseño apilado de caché de tercer nivel, triplicando este dato con respecto a 
+		 los modelos que no disponen de esta tecnología. Ahora mismo solo hay tres procesadores con esta tecnología: AMD Ryzen 7 7800X3D, AMD Ryzen 9 7900X3D
+		 y el AMD Ryzen 9  7950X3D.<br>
+         A diferencia de los modelos con más núcleos con esta tecnología 3D V-Cache, el AMD Ryzen 7 7800X3D no requiere de un diseño de CCX asimétrico, solo 
+		 tiene un CCD que cubre completamente los 8 núcleos de los que dispone el procesador. No tenemos, por tanto, CCDs con una tecnología y otro sin ella,
+		 eso evita gestión extra a nivel de drivers y sistema operativo.<br>
+         El único CCD es el que cuenta con el triple de caché de tercer nivel, en este caso 96MB de caché L3 que se suman al resto de cachés disponibles en el
+		 procesador, basadas en el número de núcleos. Estos 96MB se comparten por todos los núcleos, acelerando operaciones repetitivas y dando lugar a una
+		 memoria de intercambio mucho más grande que en los procesadores normales de esta generación que cuentan con 32MB de caché L3. <br>
+		 </p>
+         <img src="https://acf.geeknetic.es/imgw/imagenes/Tutoriales/2023/2569-amd-ryzen-7-7800x3d/2569-amd-ryzen-7-7800x3d-7.jpg?f=webp" width="400px">
+		 
+		 <br> <br>
+		 
+		 <div class="boton">
+		 <a href="index.html" class="btn"> Menú Principal </a>
+		 </div>
+		 <br> <br> <br>
+	</body>
+	 
+</html>

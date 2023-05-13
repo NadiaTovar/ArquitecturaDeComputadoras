@@ -1,0 +1,110 @@
+* {
+	margin:0;
+	padding: 0;
+	border:0;
+	font-size:100%;
+	vertical-align: baseline;
+}
+
+.header{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	height: 30vh;
+	text-align:center;
+	font-size: 80px;
+	color: #fff;
+	background: black;
+}
+
+body{
+	text-align: center;
+	font-family:sans-serif;
+}
+ 
+.title{
+	font-weight: 600;
+	font-size: 60px;
+}
+
+.nunidad{
+	font-weight: 300;
+	font-size: 45px;
+}
+
+p{
+	margin-bottom: 40px;
+	font-size: 18px;
+}
+
+ul{
+	font-size: 18px;
+}
+
+.subtitle{
+	font-size: 20px;
+	text-decoration:underline;
+}
+
+.subgrande{
+	font-size: 22px;
+}
+
+.content1{
+	display:flex;
+	align-items: right;
+	justify-content:center;
+	color: white;
+	height: 130vh;
+	background-image: url("https://img.freepik.com/vector-gratis/fondo-tecnologia-futurista-degradado-azul_23-2149120045.jpg ");
+	background-size: cover;
+}
+   
+
+.content2{
+	display:flex;
+	align-items:right;
+	color: black;
+	justify-content:center;
+	height: 100vh;
+	background-image:url("https://img.freepik.com/vector-gratis/fondo-realista-estilo-futurista_23-2149129125.jpg");
+	background-size:cover;
+	
+}
+
+.content3{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height: 105vh;
+	background-image: url("https://thumbs.dreamstime.com/b/fondo-del-panorama-de-la-inform%C3%A1tica-13369143.jpg");
+	background-size:cover;
+}
+
+.content4{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+    color: white;
+	height: 80vh;
+	background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrdxkmW43NhVam-EIF_oGoVXfcNmziwa0G0VbA0L_PQBNcSeZICXA8CxBZGlD6eSpcXk0&usqp=CAU ");
+	background-size:cover;
+}
+
+.btn{
+	display: inline-block;
+	margin-top: 15px;
+	padding: 10px 40px;
+	border:2px solid #C0C0C0;
+	color:black;
+	background: #C0C0C0;
+}
+
+.content5{
+	display:flex;
+	color: white;
+	height: 20vh;
+	background: black;
+	align-items: center;
+	justify-content: center;
+}
